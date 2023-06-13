@@ -266,7 +266,7 @@ with tab5:
     data.Equipment_Pure  = st.number_input('提纯设备【万元】', 0)
     data.Equipment_Power = st.number_input('发电机组【万元】', 0)
     data.Equipment_Other = st.number_input('其他设备【万元】', 0)
-    data.Equipment = data.Equipment_Power + data.Equipment_Power + data.Equipment_Other
+    data.Equipment = data.Equipment_Pure + data.Equipment_Power + data.Equipment_Other
     st.write("设备【万元】: ", data.Equipment)
     data.DesignAndManagementCost = st.number_input('设计和工程监理等项目管理费【万元】', 0)
     data.DesignAndManagementCost = st.number_input('财务费用【利息，万元】', 0)
@@ -294,7 +294,39 @@ with tab7:
     data.GasQuantity = st.number_input('供气量【m3/天】', 0)
     data.GasSales = st.number_input('盈利额【万元/天】', 0)
 
+    st.caption("供电")
     data.PowerPrice = st.number_input('单价【元/度】', 0)
-    data.PowerQuantity= st.number_input('售出量【m3/天】', 0)
+    data.PowerQuantity= st.number_input('售出量【度/天】', 0)
+    data.PowerSales = st.number_input('盈利额【万元/天】', 0)
+
+    st.caption("自用电量")
+    data.SelfPowerPrice = st.number_input('单价【元/度】', 0)
+    data.SelfPowerQuantity = st.number_input('售出量【度/天】', 0)
+    data.SelfPowerSales = st.number_input('盈利额【万元/天】', 0)
+
+    st.caption("沼液")
+    data.BioGasLiquidPrice = st.number_input('单价【元/吨】', 0)
+    data.BioGasLiquidQuantity = st.number_input('售出量【吨/天】', 0)
+    data.BioGasLiquidSales = st.number_input('盈利额【万元/天】', 0)
+
+    st.caption("沼渣")
+    data.BioGasSolidPrice = st.number_input('单价【元/吨】', 0)
+    data.BioGasSolidQuantity = st.number_input('售出量【吨/天】', 0)
+    data.BioGasSolidSales = st.number_input('盈利额【万元/天】', 0)
+
+    st.caption("生物天然气")
+    data.PureBioGasPrice = st.number_input('单价【元/m3】', 0)
+    data.PureBioGasQuantity = st.number_input('售出量【m3/天】', 0)
+    data.PureBioGasSales = st.number_input('盈利额【万元/天】', 0)
+
+    st.caption("其他收入")
+    data.OtherPrice = st.number_input('单价【元/吨】', 0)
+    data.OtherQuantity = st.number_input('售出量【吨/天】', 0)
+    data.OtherSales = st.number_input('盈利额【万元/天】', 0)
+
+    data.GovermentSubsidies= st.number_input('政府补贴【万元/天】', 0)
+    data.TotalSales=data.GasSales+data.PowerSales+data.SelfPowerSales+data.BioGasSolidSales+data.BioGasLiquidSales+data.PureBioGasSales+data.GovermentSubsidies+data.OtherSales
+    data.TotalSales=st.number_input('总收入【万元/天】', 0)
+
 
 
