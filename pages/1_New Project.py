@@ -289,7 +289,7 @@ with tab6:
 
 with tab7:
     st.subheader("年收入")
-    st.catpion("供气")
+    st.caption("供气")
     data.GasPrice = st.number_input('单价【元/m3】', 0)
     data.GasQuantity = st.number_input('供气量【m3/天】', 0)
     data.GasSales = st.number_input('盈利额【万元/天】', 0)
