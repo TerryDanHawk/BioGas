@@ -95,17 +95,17 @@ class ProjectInfor:
              "沼气潜力（Nm3）": 0, "甲烷潜力（Nm3）": 0},
         ]
     )
-    #总日进料量
+    #_总日进料量
     TotalDailyInput=0
-    #总可挥发性干物质含量
+    #_总可挥发性干物质含量
     TotalVS=0
-    #总沼气产量
+    #_总沼气产量
     TotalBiogasYield=0
-    #总甲烷含量
+    #_总甲烷含量
     TotalMethane=0
-    #总沼气潜力
+    #_总沼气潜力
     TotalSBY=0
-    #总甲烷潜力
+    #_总甲烷潜力
     TotalSMY=0
 
     #投资和资金来源
@@ -127,6 +127,58 @@ class ProjectInfor:
     OwnedFund=0
     OtherFund=0
     TotalFund=0
+
+    #运行费用
+    MatFee=pd.DataFrame(
+        [
+            {"原料": "牛粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "猪粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "羊粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "马粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "鸡粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "鸭粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "鹅粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "其他粪", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "玉米青贮", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "能源草", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "粮食残渣", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "甜菜", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "饲料残渣", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+            {"原料": "水", "购买量（吨/天）": 0, "单价（元/吨）": 0, "小计（元）": 0},
+
+        ]
+    )
+
+    TotalMatQuantity=0
+    TotalMatFee=0
+
+    PowerUseQuantity=0
+    PowerUsePrice=0
+    PowerUseFee=0
+
+    FuelUseQuantity=0
+    FuelUsePrice=0
+    FuelUseFee=0
+
+    EmployeeQuantity=0
+    EmployeeAvgWelfare=0
+    EmployeeWelfareFee=0
+
+    WaterUseQuantity=0
+    WaterUsePrice=0
+    WaterUseFee=0
+
+    MaintenanceFee=0
+    EquipmentFee=0
+    LandFee=0
+    InsuranceFee=0
+    MonitorFee=0
+    BioGasLiquidUseFee=0
+    FinancialFee=0
+    DepreciationFee=0
+    OtherFee=0
+
+
 
     #年收入
     GasPrice=0
@@ -284,49 +336,135 @@ with tab5:
     data.OtherFund = st.number_input('其他资金来源【万元】', 0)
     data.TotalFund=data.Loan+data.GovermentContribution+data.OwnedFund+data.OtherFund
     st.write("总计【万元】： ",data.TotalFund)
+
+
 with tab6:
-    st.header("运行费用")
+
+    st.subheader("原料费用")
+    df=pd.DataFrame(
+        [
+            {"原料": "牛粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "猪粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "羊粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "马粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "鸡粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "鸭粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "鹅粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "其他粪", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "玉米青贮", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "能源草", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "粮食残渣", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "甜菜", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "饲料残渣", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+            {"原料": "水", "购买量（吨/天）": 0, "单价（元/吨）": 0},
+
+        ]
+    )
+    edited_df = st.experimental_data_editor(df)
+
+    for index in edited_df.index:
+        data.MatFee.loc[index,"购买量（吨/天）"]=edited_df.loc[index,"购买量（吨/天）"]
+        data.MatFee.loc[index, "单价（元/吨）"] = edited_df.loc[index, "单价（元/吨）"]
+        data.MatFee.loc[index,"小计（元）"]= data.MatFee.loc[index,"购买量（吨/天）"]*data.MatFee.loc[index,"单价（元/吨）"]
+        data.TotalMatQuantity+=data.MatFee.loc[index,"购买量（吨/天）"]
+        data.TotalMatFee+=data.MatFee.loc[index,"小计（元）"]
+
+    st.caption("原料费用统计")
+    st.table(data.MatFee)
+
+    st.write("总购买量【吨/天】： ",data.TotalMatQuantity)
+    st.write("总原料费用【元】： ", data.TotalMatFee)
+
+    st.subheader("耗电量")
+
+    data.PowerUseQuantity = st.number_input("电量【度/天】", 0)
+    data.PowerUsePrice = st.number_input("单价【元/度】", 0)
+    data.PowerUseFee = data.PowerUsePrice * data.PowerUseQuantity
+    st.write("耗电成本小计【万元/天】", data.PowerUseFee)
+
+    st.subheader("燃料成本")
+
+    data.FuelUseQuantity = st.number_input("燃料用量【吨/天】", 0)
+    data.FuelUsePrice = st.number_input("燃料单价【元/吨】", 0)
+    data.FuelUseFee = data.PowerUsePrice * data.PowerUseQuantity
+    st.write("燃料成本小计【万元/天】", data.FuelUseFee)
+
+    st.subheader("员工工资福利")
+
+    data.EmployeeQuantity = st.number_input("数量【人】", 0)
+    data.EmployeeAvgWelfare = st.number_input("月均工资福利【元/月】", 0)
+    data.EmployeeWelfareFee = data.EmployeeQuantity * data.EmployeeAvgWelfare
+    st.write("员工工资福利成本小计【万元/月】", data.EmployeeWelfareFee)
+
+    st.subheader("水费")
+
+    data.WaterUseQuantity = st.number_input("水用量【吨/天】", 0)
+    data.WaterUsePrice = st.number_input("水单价【元/吨】", 0)
+    data.WaterUseFee = data.WaterUseQuantity * data.WaterUsePrice
+    st.write("水费成本小计【万元/天】", data.WaterUseFee)
+
+    st.subheader("其他成本")
+
+    data.MaintenanceFee = st.number_input("维修费用【万元/月】",0)
+
+    data.EquipmentFee = st.number_input("设备维护费用【万元/月】",0)
+
+    data.LandFee = st.number_input("土地使用费【万元/月】",0)
+
+    data.InsuranceFee = st.number_input("保险费用【万元/月】",0)
+
+    data.MonitorFee = st.number_input("监测费用【万元/月】",0)
+
+    data.BioGasLiquidUseFee = st.number_input("沼液施用【万元/月】",0)
+
+    data.FinancialFee = st.number_input("财务费用（利息）【万元/月】",0)
+
+    data.DepreciationFee = st.number_input("折旧费【万元/月】",0)
+
+    data.OtherFee = st.number_input('其他费用【万元/月】', 0)
+
+
 
 with tab7:
     st.subheader("年收入")
     st.caption("供气")
-    data.GasPrice = st.number_input('单价【元/m3】', 0)
+    data.GasPrice = st.number_input('供气单价【元/m3】', 0)
     data.GasQuantity = st.number_input('供气量【m3/天】', 0)
-    data.GasSales = st.number_input('盈利额【万元/天】', 0)
+    data.GasSales = st.number_input('供气盈利额【万元/天】', 0)
 
     st.caption("供电")
-    data.PowerPrice = st.number_input('单价【元/度】', 0)
-    data.PowerQuantity= st.number_input('售出量【度/天】', 0)
-    data.PowerSales = st.number_input('盈利额【万元/天】', 0)
+    data.PowerPrice = st.number_input('供电单价【元/度】', 0)
+    data.PowerQuantity= st.number_input('供电售出量【度/天】', 0)
+    data.PowerSales = st.number_input('供电盈利额【万元/天】', 0)
 
     st.caption("自用电量")
-    data.SelfPowerPrice = st.number_input('单价【元/度】', 0)
-    data.SelfPowerQuantity = st.number_input('售出量【度/天】', 0)
-    data.SelfPowerSales = st.number_input('盈利额【万元/天】', 0)
+    data.SelfPowerPrice = st.number_input('自用电量单价【元/度】', 0)
+    data.SelfPowerQuantity = st.number_input('自用点售出量【度/天】', 0)
+    data.SelfPowerSales = st.number_input('自用电盈利额【万元/天】', 0)
 
     st.caption("沼液")
-    data.BioGasLiquidPrice = st.number_input('单价【元/吨】', 0)
-    data.BioGasLiquidQuantity = st.number_input('售出量【吨/天】', 0)
-    data.BioGasLiquidSales = st.number_input('盈利额【万元/天】', 0)
+    data.BioGasLiquidPrice = st.number_input('沼液单价【元/吨】', 0)
+    data.BioGasLiquidQuantity = st.number_input('沼液售出量【吨/天】', 0)
+    data.BioGasLiquidSales = st.number_input('沼液盈利额【万元/天】', 0)
 
     st.caption("沼渣")
-    data.BioGasSolidPrice = st.number_input('单价【元/吨】', 0)
-    data.BioGasSolidQuantity = st.number_input('售出量【吨/天】', 0)
-    data.BioGasSolidSales = st.number_input('盈利额【万元/天】', 0)
+    data.BioGasSolidPrice = st.number_input('沼渣单价【元/吨】', 0)
+    data.BioGasSolidQuantity = st.number_input('沼渣售出量【吨/天】', 0)
+    data.BioGasSolidSales = st.number_input('沼渣盈利额【万元/天】', 0)
 
     st.caption("生物天然气")
-    data.PureBioGasPrice = st.number_input('单价【元/m3】', 0)
-    data.PureBioGasQuantity = st.number_input('售出量【m3/天】', 0)
-    data.PureBioGasSales = st.number_input('盈利额【万元/天】', 0)
+    data.PureBioGasPrice = st.number_input('生物天然气单价【元/m3】', 0)
+    data.PureBioGasQuantity = st.number_input('生物天然气售出量【m3/天】', 0)
+    data.PureBioGasSales = st.number_input('生物天然气盈利额【万元/天】', 0)
 
     st.caption("其他收入")
-    data.OtherPrice = st.number_input('单价【元/吨】', 0)
-    data.OtherQuantity = st.number_input('售出量【吨/天】', 0)
-    data.OtherSales = st.number_input('盈利额【万元/天】', 0)
+    data.OtherPrice = st.number_input('其他收入单价【元/吨】', 0)
+    data.OtherQuantity = st.number_input('其他收入售出量【吨/天】', 0)
+    data.OtherSales = st.number_input('其他收入盈利额【万元/天】', 0)
 
     data.GovermentSubsidies= st.number_input('政府补贴【万元/天】', 0)
     data.TotalSales=data.GasSales+data.PowerSales+data.SelfPowerSales+data.BioGasSolidSales+data.BioGasLiquidSales+data.PureBioGasSales+data.GovermentSubsidies+data.OtherSales
-    data.TotalSales=st.number_input('总收入【万元/天】', 0)
+    st.write("总收入【万元/天】: ",data.TotalSales)
 
 
 
