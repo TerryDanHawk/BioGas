@@ -466,5 +466,10 @@ with tab7:
     data.TotalSales=data.GasSales+data.PowerSales+data.SelfPowerSales+data.BioGasSolidSales+data.BioGasLiquidSales+data.PureBioGasSales+data.GovermentSubsidies+data.OtherSales
     st.write("总收入【万元/天】: ",data.TotalSales)
 
+st.write("----------------------------------------------------------")
+uploaded_file = st.file_uploader("导入项目信息", type=['csv'])
+st.write("----------------------------------------------------------")
+if st.button("保存并提交所有项目信息"):
+    st.write("保存成功！")
 
 
